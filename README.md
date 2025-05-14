@@ -18,3 +18,5 @@ After building the project (i.e., running `ant`), run the following command in t
 ### How to clean up (from Terminal):
 
 1. Run `ant clean` to clean the project (i.e., delete all generated files).
+
+
