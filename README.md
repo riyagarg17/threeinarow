@@ -37,3 +37,8 @@ After building the project (i.e., running `ant`), run the following command in t
 - Added new unit tests for the model class
 - Improved encapsulation by making game board data private
 
+### Bug Fixes
+- Fixed input validation in `ThreeInARowBlock.setContents()` method
+- Added unit test to verify null input validation
+- Updated method to check input parameter instead of instance variable
+
