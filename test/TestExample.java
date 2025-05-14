@@ -43,4 +43,18 @@ public class TestExample {
         assertFalse("Top row blocks should not be legal moves initially", 
                    model.getBlock(0, 0).getIsLegalMove());
     }
+
+    /**
+     * Test case for setContents method's input validation.
+     * 
+     * - Test case identifier: testSetContentsFailsInputValidation
+     * - Expected output: IllegalArgumentException is thrown
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetContentsFailsInputValidation() {
+        ThreeInARowBlock block = new ThreeInARowBlock(game);
+        
+        block.setContents(null);
+
+    }
 }
