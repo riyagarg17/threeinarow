@@ -1,3 +1,5 @@
+package model;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -202,10 +204,10 @@ public class ThreeInARowGame {
 		updateBlock(0,2);
 		player = "2";
 		if(movesLeft<7) {
-		    if((blocksData[1][2].getContents().equals(blocksData[0][2].getContents()) &&
-			blocksData[0][2].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[1][2].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[1][0].getContents()))) {
+		    if((blocksData[1][2].getContents().equals(blocksData[1][1].getContents()) &&
+			blocksData[1][1].getContents().equals(blocksData[1][0].getContents())) ||
+		       (blocksData[1][2].getContents().equals(blocksData[0][2].getContents()) &&
+			blocksData[0][2].getContents().equals(blocksData[2][2].getContents()))) {
 			playerturn.setText("Player 1 wins!");
 			endGame();
 		    } else if(movesLeft==0) {
@@ -236,7 +238,7 @@ public class ThreeInARowGame {
 	    } else if(block==blocks[2][1]) {
 		blocksData[2][1].setContents("X");
 		blocksData[2][1].setIsLegalMove(false);
-		// Enabled the space on top of this one
+		// Enable the space on top of this one
 		blocksData[1][1].setIsLegalMove(true);
 		updateBlock(2,1);
 		updateBlock(1,1);
@@ -379,10 +381,10 @@ public class ThreeInARowGame {
 		updateBlock(0,2);
 		player = "1";
 		if(movesLeft<7) {
-		    if((blocksData[1][2].getContents().equals(blocksData[0][2].getContents()) &&
-			blocksData[0][2].getContents().equals(blocksData[2][2].getContents())) ||
-		       (blocksData[1][2].getContents().equals(blocksData[1][1].getContents()) &&
-			blocksData[1][1].getContents().equals(blocksData[1][0].getContents()))) {
+		    if((blocksData[1][2].getContents().equals(blocksData[1][1].getContents()) &&
+			blocksData[1][1].getContents().equals(blocksData[1][0].getContents())) ||
+		       (blocksData[1][2].getContents().equals(blocksData[0][2].getContents()) &&
+			blocksData[0][2].getContents().equals(blocksData[2][2].getContents()))) {
 			playerturn.setText("Player 2 wins!");
 			endGame();
 		    } else if(movesLeft==0) {
@@ -455,42 +457,45 @@ public class ThreeInARowGame {
     }
 
     /**
-     * Updates the block at the given row and column 
-     * after one of the player's moves.
+     * Updates the text that appears on the block at the given row and column
+     * of the game board.
      *
-     * @param row The row that contains the block
-     * @param column The column that contains the block
+     * @param row The row of the block to update (0-2)
+     * @param column The column of the block to update (0-2)
      */
     protected void updateBlock(int row, int column) {
-	blocks[row][column].setText(blocksData[row][column].getContents());
-	blocks[row][column].setEnabled(blocksData[row][column].getIsLegalMove());
+	if(blocksData[row][column].getIsLegalMove()) {
+	    blocks[row][column].setText("legal");
+	} else {
+	    blocks[row][column].setText(blocksData[row][column].getContents());
+	}
     }
 
     /**
-     * Ends the game disallowing further player turns.
+     * Ends the current game, disabling all blocks on the board.
      */
     public void endGame() {
-	for(int row = 0;row<3;row++) {
-	    for(int column = 0;column<3;column++) {
-		blocks[row][column].setEnabled(false);
+	for(int row = 0; row<3; row++) {
+	    for(int column = 0; column<3; column++) {
+		blocksData[row][column].setIsLegalMove(false);
+		updateBlock(row, column);
 	    }
 	}
     }
 
     /**
-     * Resets the game to be able to start playing again.
+     * Resets the game.
      */
     public void resetGame() {
-        for(int row = 0;row<3;row++) {
-            for(int column = 0;column<3;column++) {
-                blocksData[row][column].reset();
-		// Enable the bottom row
+	for(int row = 0; row<3; row++) {
+	    for(int column = 0; column<3; column++) {
+		blocksData[row][column].reset();
 		blocksData[row][column].setIsLegalMove(row == 2);
-		updateBlock(row,column);
-            }
-        }
-        player = "1";
-        movesLeft = 9;
-        playerturn.setText("Player 1 to play 'X'");
+		updateBlock(row, column);
+	    }
+	}
+	movesLeft = 9;
+	player = "1";
+	playerturn.setText("Player 1 to play 'X'");
     }
-}
+} 

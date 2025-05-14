@@ -1,3 +1,5 @@
+package model;
+
 /**
  * The ThreeInARowBlock class represents a given block in the game.
  */
@@ -76,4 +78,4 @@ public class ThreeInARowBlock
 	this.contents = "";
 	this.isLegalMove = false;
     }
-}
+} 
