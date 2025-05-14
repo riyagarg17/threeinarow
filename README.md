@@ -20,3 +20,20 @@ After building the project (i.e., running `ant`), run the following command in t
 1. Run `ant clean` to clean the project (i.e., delete all generated files).
 
 
+##Change log 
+
+### MVC Architecture Refactoring
+- Implemented Model-View-Controller (MVC) architecture pattern
+- Created `model` package to separate business logic from presentation
+- Moved `ThreeInARowGame.java` and `ThreeInARowBlock.java` to `model` package
+- Updated test files to reflect new package structure
+- Set foundation for future MVC improvements (view and controller separation)
+- Tested functionality by compiling and running test suite. 
+
+### Game Board Model Refactoring
+- Created new `ThreeInARowModel` class to encapsulate game board data
+- Moved game board data (`blocksData`) from `ThreeInARowGame` to `ThreeInARowModel`
+- Updated all code to use the new model class
+- Added new unit tests for the model class
+- Improved encapsulation by making game board data private
+
